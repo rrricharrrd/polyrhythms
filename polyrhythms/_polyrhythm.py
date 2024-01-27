@@ -26,6 +26,7 @@ class Polyrhythm:
     def set_tempo(self, bpm: int = 60):
         self._beat_interval = 60 / bpm / self._subdivision
         logging.debug(f"Interval {self._beat_interval}")
+        self._duration = min(BEEP_DURATION, 0.98 * self._beat_interval)  # Ensure that beeps fit
         t = np.linspace(0, self._duration, int(self._duration * SAMPLE_RATE), endpoint=False)
         self._signals = [self._volume_factor * np.sin(2 * np.pi * freq * t) for freq in self._freqs]
 
@@ -42,4 +43,4 @@ class Polyrhythm:
                 if signals:
                     signal = sum(signals)
                     yield signal
-                time.sleep(self._beat_interval - BEEP_DURATION)
+                time.sleep(self._beat_interval - self._duration)
