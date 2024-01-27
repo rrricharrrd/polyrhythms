@@ -1,0 +1,23 @@
+[project]
+name = "polyrhythms"
+version = "0.0.1"
+#dynamic = ["version"]
+description = "Training tool to learn polyrhythms"
+readme = "README.md"
+# requires-python = ">=3.7"  # TODO
+license = {file = "LICENSE.txt"}
+authors = [{name = "Richard Harris"}]
+maintainers = [{name = "Richard Harris"}]
+
+dependencies = []
+
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["polyrhythms"]
+package-data = {}
+
+#[tool.setuptools_scm]
+#version_file = "pkg/_version.py"
