@@ -13,7 +13,10 @@ player = Player(pr)
 
 
 def tempo_change():
+    is_playing = player.is_playing()
     player.stop()
+    if is_playing:
+        start_player()
 
 
 def start_player():
