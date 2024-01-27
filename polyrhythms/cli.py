@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-import sounddevice as sd
+import sounddevice as sd  # type: ignore [import-untyped]
 
 from polyrhythms import Polyrhythm, Tone
 from polyrhythms.settings import SAMPLE_RATE
