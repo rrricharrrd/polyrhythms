@@ -67,10 +67,6 @@ def metronome(beats_per_minute, duration=BEEP_DURATION):
         beat += 1
 
 
-# # Adjust the beats_per_minute value based on your desired tempo
-# metronome(beats_per_minute=120)
-
-
 if __name__ == "__main__":
     pr = Polyrhythm()
     pr.add_rhythm(3, A_FREQUENCY)

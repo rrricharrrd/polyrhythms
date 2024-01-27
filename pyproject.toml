@@ -13,6 +13,9 @@ dependencies = [
     "sounddevice >= 0.4.6, <0.5.0",
 ]
 
+[project.scripts]
+play-polyrhythm = "polyrhythms.cli:main"
+
 [build-system]
 requires = ["setuptools>=64", "setuptools_scm>=8", "wheel"]
 build-backend = "setuptools.build_meta"
