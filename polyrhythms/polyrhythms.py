@@ -6,13 +6,7 @@ import time
 import numpy as np
 import sounddevice as sd
 
-from .settings import (
-    A_FREQUENCY,
-    BEEP_DURATION,
-    E_FREQUENCY,
-    SAMPLE_RATE,
-    VOLUME_FACTOR,
-)
+from .settings import A_FREQUENCY, BEEP_DURATION, E_FREQUENCY, SAMPLE_RATE, VOLUME_FACTOR
 
 
 class Polyrhythm:
