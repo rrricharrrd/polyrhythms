@@ -13,6 +13,9 @@ dependencies = [
     "sounddevice >= 0.4.6, <0.5.0",
 ]
 
+[project.optional-dependencies]
+app = ["streamlit"]
+
 [project.scripts]
 play-polyrhythm = "polyrhythms.cli:main"
 

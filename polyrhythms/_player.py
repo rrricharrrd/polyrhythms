@@ -1,3 +1,5 @@
+import logging
+
 import sounddevice as sd
 
 from polyrhythms import Polyrhythm
@@ -18,4 +20,5 @@ class Player:
                 break
 
     def stop(self) -> None:
+        logging.info("Stopping player")
         self._playing = False
