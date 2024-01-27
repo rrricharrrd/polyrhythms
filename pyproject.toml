@@ -20,3 +20,13 @@ package-data = {}
 
 [tool.setuptools_scm]
 version_file = "polyrhythms/_version.py"
+
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+warn_unused_configs = true
