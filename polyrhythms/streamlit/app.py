@@ -1,4 +1,5 @@
 import asyncio
+import logging
 
 import streamlit as st
 
@@ -16,14 +17,12 @@ def tempo_change():
 
 
 def start_player():
-    print("Starting")
-    st.text("Starting")
+    logging.debug("Starting")
     asyncio.run(player.start())
 
 
 def stop_player():
-    print("Stopping")
-    st.text("Stopping")
+    logging.debug("Stopping")
     player.stop()
 
 
@@ -32,9 +31,9 @@ rhythm1 = st.sidebar.number_input("Rhythm 1", min_value=1, max_value=10, value=N
 rhythm2 = st.sidebar.number_input("Rhythm 2", min_value=1, max_value=10, value=None, step=1)
 
 if rhythm1 is not None:
-    pr.add_rhythm(rhythm1, Tone.A)
+    pr.add_rhythm(int(rhythm1), Tone.A)
 if rhythm2 is not None:
-    pr.add_rhythm(rhythm2, Tone.E)
+    pr.add_rhythm(int(rhythm2), Tone.E)
 pr.set_tempo(tempo)
 
 
