@@ -3,8 +3,8 @@ import sys
 
 import sounddevice as sd
 
-from polyrhythms import Polyrhythm
-from polyrhythms.settings import A_FREQUENCY, E_FREQUENCY, SAMPLE_RATE
+from polyrhythms import Polyrhythm, Tone
+from polyrhythms.settings import SAMPLE_RATE
 
 
 def parse_args(args):
@@ -20,11 +20,11 @@ def main(argv=None):
     args = parse_args(argv)
 
     pr = Polyrhythm()
-    notes = [A_FREQUENCY, E_FREQUENCY]  # TODO make configurable
+    tones = [Tone.A, Tone.E]  # TODO make configurable
     for ix, rhythm in enumerate(args.rhythms):
         rhythm = int(rhythm)
-        note = notes[ix % 2]
-        pr.add_rhythm(rhythm, note)
+        tone = tones[ix % 2]
+        pr.add_rhythm(rhythm, tone)
     pr.set_tempo(args.tempo)
 
     for beep in pr.play():
