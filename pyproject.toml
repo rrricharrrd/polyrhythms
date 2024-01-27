@@ -1,7 +1,6 @@
 [project]
 name = "polyrhythms"
-version = "0.0.1"
-#dynamic = ["version"]
+dynamic = ["version"]
 description = "Training tool to learn polyrhythms"
 readme = "README.md"
 # requires-python = ">=3.7"  # TODO
@@ -19,5 +18,5 @@ build-backend = "setuptools.build_meta"
 packages = ["polyrhythms"]
 package-data = {}
 
-#[tool.setuptools_scm]
-#version_file = "pkg/_version.py"
+[tool.setuptools_scm]
+version_file = "polyrhythms/_version.py"
