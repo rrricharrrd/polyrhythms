@@ -1,16 +1,14 @@
 import argparse
+import asyncio
 import sys
 
-import sounddevice as sd  # type: ignore [import-untyped]
-
-from polyrhythms import Polyrhythm, Tone
-from polyrhythms.settings import SAMPLE_RATE
+from polyrhythms import Player, Polyrhythm, Tone
 
 
 def parse_args(args):
     parser = argparse.ArgumentParser()
     parser.add_argument("--tempo", "-t", type=int, default=60, help="Tempo (beats per minute)")
-    parser.add_argument("--rhythms", "-r", nargs="+", help="Subdivions of beat")
+    parser.add_argument("--rhythms", "-r", nargs="+", help="Subdivisions of beat")
     # TODO add notes
     return parser.parse_args()
 
@@ -27,9 +25,8 @@ def main(argv=None):
         pr.add_rhythm(rhythm, tone)
     pr.set_tempo(args.tempo)
 
-    for beep in pr.play():
-        sd.play(beep, samplerate=SAMPLE_RATE)
-        sd.wait()
+    player = Player(pr)
+    asyncio.run(player.start())
 
 
 if __name__ == "__main__":

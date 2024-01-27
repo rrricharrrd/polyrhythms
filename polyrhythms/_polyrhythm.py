@@ -1,6 +1,6 @@
+import asyncio
 import logging
 import math
-import time
 
 import numpy as np
 
@@ -24,15 +24,15 @@ class Polyrhythm:
         self._subdivision = math.lcm(*self._beats)
 
     def set_tempo(self, bpm: int = 60):
-        self._beat_interval = 60 / bpm / self._subdivision
+        self._beat_interval = 60 / bpm / self._subdivision  # Calculate minimal time between beeps
         logging.debug(f"Interval {self._beat_interval}")
         self._duration = min(BEEP_DURATION, 0.98 * self._beat_interval)  # Ensure that beeps fit
         t = np.linspace(0, self._duration, int(self._duration * SAMPLE_RATE), endpoint=False)
         self._signals = [self._volume_factor * np.sin(2 * np.pi * freq * t) for freq in self._freqs]
 
-    def play(self):
+    async def play(self):
         while True:
-            for i in range(self._subdivision):
+            for i in range(self._subdivision):  # One complete iteration over the entire for-loop is one beat
                 signals = []
                 log_str = ""
                 for ix, b in enumerate(self._beats):
@@ -43,4 +43,4 @@ class Polyrhythm:
                 if signals:
                     signal = sum(signals)
                     yield signal
-                time.sleep(self._beat_interval - self._duration)
+                await asyncio.sleep(self._beat_interval - self._duration)
