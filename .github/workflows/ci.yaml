@@ -14,6 +14,9 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements-lint.txt
-    - name: Run tests
+    - name: Run static checks
       run: |
-        pre-commit run --all-files
+        black polyrhythms tests
+        flake8 polyrhythms tests
+        isort polyrhythms tests
+        mypy polyrhythms tests
