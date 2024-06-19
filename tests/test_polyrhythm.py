@@ -5,7 +5,7 @@ from polyrhythms import Polyrhythm, Tone
 
 
 @pytest.mark.asyncio
-async def test_basic():
+async def test_basic() -> None:
     pr = Polyrhythm()
     pr.add_rhythm(2, Tone.A)
     pr.add_rhythm(3, Tone.E)
