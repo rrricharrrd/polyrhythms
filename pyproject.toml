@@ -9,7 +9,7 @@ authors = [{name = "Richard Harris"}]
 maintainers = [{name = "Richard Harris"}]
 
 dependencies = [
-    "numpy",
+    "numpy >=1.26, < 2.0",
     "sounddevice >= 0.4.6, <0.5.0",
 ]
 
@@ -27,6 +27,7 @@ package-data = {}
 [tool.setuptools_scm]
 version_file = "polyrhythms/_version.py"
 
+# Linting
 
 [tool.black]
 line-length = 120
