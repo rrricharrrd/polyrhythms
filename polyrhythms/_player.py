@@ -1,4 +1,4 @@
-import sounddevice as sd  # type: ignore [import-untyped]
+import sounddevice as sd
 
 from polyrhythms import Polyrhythm
 from polyrhythms.settings import SAMPLE_RATE
@@ -9,7 +9,7 @@ class Player:
         self._polyrhythm = polyrhythm
         self._playing = False
 
-    async def start(self):
+    async def start(self) -> None:
         self._playing = True
         async for beep in self._polyrhythm.play():
             sd.play(beep, samplerate=SAMPLE_RATE)
@@ -17,5 +17,5 @@ class Player:
             if not self._playing:
                 break
 
-    def stop(self):
+    def stop(self) -> None:
         self._playing = False
