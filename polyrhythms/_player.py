@@ -1,4 +1,4 @@
-import sounddevice as sd  # type: ignore [import-untyped]
+import sounddevice as sd
 
 from polyrhythms import Polyrhythm
 from polyrhythms.settings import SAMPLE_RATE
