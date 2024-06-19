@@ -20,3 +20,19 @@ jobs:
         flake8 polyrhythms tests
         isort polyrhythms tests
         mypy polyrhythms tests
+
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.12
+    - name: Install dependencies
+      run: |
+        pip install .
+        pip install -r requirements-tests.txt
+    - name: Run tests
+      run: |
+        pytest tests

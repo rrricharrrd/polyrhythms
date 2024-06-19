@@ -17,6 +17,7 @@ class Polyrhythm:
         self._signals = []
         self._duration = BEEP_DURATION
         self._volume_factor = VOLUME_FACTOR
+        self._stopped = True
 
     def add_rhythm(self, beats: int, tone: Tone = Tone.A):
         self._beats.append(beats)
@@ -30,17 +31,24 @@ class Polyrhythm:
         t = np.linspace(0, self._duration, int(self._duration * SAMPLE_RATE), endpoint=False)
         self._signals = [self._volume_factor * np.sin(2 * np.pi * freq * t) for freq in self._freqs]
 
+    async def play_once(self):
+        for i in range(self._subdivision):  # One complete iteration over the entire for-loop is one beat
+            signals = []
+            log_str = ""
+            for ix, b in enumerate(self._beats):
+                if i % b == 0:
+                    log_str += str(b)
+                    signals.append(self._signals[ix])
+            logging.debug(log_str)
+            if signals:
+                signal = sum(signals)
+                yield signal
+            await asyncio.sleep(self._beat_interval - self._duration)
+
     async def play(self):
-        while True:
-            for i in range(self._subdivision):  # One complete iteration over the entire for-loop is one beat
-                signals = []
-                log_str = ""
-                for ix, b in enumerate(self._beats):
-                    if i % b == 0:
-                        log_str += str(b)
-                        signals.append(self._signals[ix])
-                logging.debug(log_str)
-                if signals:
-                    signal = sum(signals)
-                    yield signal
-                await asyncio.sleep(self._beat_interval - self._duration)
+        self._stopped = False
+        while not self._stopped:
+            await self.play_once()
+
+    def stop(self):
+        self._stopped = True
