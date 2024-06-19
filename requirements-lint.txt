@@ -2,3 +2,7 @@ black
 flake8
 isort
 mypy
+
+# Needed for mypy
+numpy
+sounddevice
